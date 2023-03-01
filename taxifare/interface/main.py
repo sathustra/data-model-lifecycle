@@ -144,7 +144,8 @@ def train(min_date:str = '2009-01-01',
     save_model(model=model)
 
     # The latest model should be moved to staging
-    pass  # YOUR CODE HERE
+    if MODEL_TARGET == 'mlflow':
+        mlflow_transition_model("None","Staging")
 
     print("✅ train() done \n")
     return val_mae
@@ -164,7 +165,6 @@ def evaluate(min_date:str = '2014-01-01',
     from taxifare.ml_logic.registry import load_model, save_results
 
     model = load_model(stage=stage)
-    assert model is not None
 
     min_date = parse(min_date).strftime('%Y-%m-%d') # e.g '2009-01-01'
     max_date = parse(max_date).strftime('%Y-%m-%d') # e.g '2009-01-01'

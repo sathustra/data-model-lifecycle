@@ -34,7 +34,7 @@ default:
 
 test_kitt:
 	@echo "\n 🧪 computing and saving your progress at 'tests/lifecycle/test_output.txt'...(this can take a while)"
-	@pytest tests/lifecycle -c "./tests/pytest_kitt.ini" 2>&1 > tests/lifecycle/test_output.txt
+	@pytest tests/lifecycle -c "./tests/pytest_kitt.ini" 2>&1 > tests/lifecycle/test_output.txt || true
 	@echo "\n 🙏 Please: \n git add tests \n git commit -m 'checkpoint' \n ggpush"
 
 test_mlflow_config:
@@ -95,4 +95,3 @@ reset_gcs_files:
 	-gsutil mb -p ${GCP_PROJECT} -l ${GCP_REGION} gs://${BUCKET_NAME}
 
 reset_all_files: reset_local_files reset_bq_files reset_gcs_files
-
